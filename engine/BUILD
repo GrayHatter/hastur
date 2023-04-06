@@ -2,8 +2,18 @@ load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
 load("//bzl:copts.bzl", "HASTUR_COPTS")
 
 cc_library(
+    name = "zig-engine",
+    srcs = ["libengine.so"],
+    hdrs = [],
+)
+
+
+
+cc_library(
     name = "engine",
-    srcs = ["engine.cpp"],
+    srcs = [
+        "engine.cpp",
+    ],
     hdrs = ["engine.h"],
     copts = HASTUR_COPTS,
     visibility = ["//visibility:public"],
@@ -17,6 +27,7 @@ cc_library(
         "//uri",
         "@spdlog",
         "@zlib",
+        ":zig-engine",
     ],
 )
 

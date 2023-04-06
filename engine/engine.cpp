@@ -106,6 +106,10 @@ void Engine::set_layout_width(int width) {
     on_layout_update_();
 }
 
+extern "C" {
+    void run_zig(void);
+}
+
 void Engine::on_navigation_success() {
     dom_ = html::parse(response_.body);
     stylesheet_ = css::default_style();
@@ -129,6 +133,7 @@ void Engine::on_navigation_success() {
 
     // Start downloading all stylesheets.
     spdlog::info("Loading {} stylesheets", head_links.size());
+    run_zig();
     std::vector<std::future<std::vector<css::Rule>>> future_new_rules;
     future_new_rules.reserve(head_links.size());
     for (auto const *link : head_links) {
