@@ -124,7 +124,7 @@ void Engine::on_navigation_success() {
     auto head_links = dom::nodes_by_xpath(dom_.html(), "/html/head/link");
     std::erase_if(head_links, [](auto const *link) {
         return !link->attributes.contains("rel")
-                || (link->attributes.contains("rel") && link->attributes.at("rel") != "stylesheet")
+                || link->attributes.at("rel") != "stylesheet"
                 || !link->attributes.contains("href");
     });
 
